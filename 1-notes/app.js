@@ -11,13 +11,15 @@ const COMMANDS = {
     list: "list"
 }
 
+const titleOption = {
+    describe: 'Title of note',
+    demand: true,
+    alias: 't'
+};
+
 const argv = yargs
     .command('add','Add a new note',{
-        title: {
-            describe: 'Title of note',
-            demand: true,
-            alias: 't'
-        },
+        title: titleOption,
         body: {
             describe: 'Body of note',
             demand: false,
@@ -26,20 +28,12 @@ const argv = yargs
         }
     })
     .command('read','Read a note by title',{
-        title: {
-            describe: 'Title of note',
-            demand: true,
-            alias: 't'
-        }
+        title: titleOption,
     })
     .command('remove','Remove a note by title',{
-        title: {
-            describe: 'Title of note',
-            demand: true,
-            alias: 't'
-        }
+        title: titleOption,
     })
-    .command('list','List all the existent notes',{ })
+    .command('list','List all the existent notes')
     .help()
     .argv;
 
