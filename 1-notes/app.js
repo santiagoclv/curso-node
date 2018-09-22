@@ -1,3 +1,7 @@
+const yargs = require('yargs');
+const os = require('os');
+const notes = require('./notes.js');
+
 console.log('Starting app.js');
 
 const COMMANDS = {
@@ -7,11 +11,37 @@ const COMMANDS = {
     list: "list"
 }
 
-const argv = require('yargs').argv;
-
-const os = require('os');
-const notes = require('./notes.js');
-
+const argv = yargs
+    .command('add','Add a new note',{
+        title: {
+            describe: 'Title of note',
+            demand: true,
+            alias: 't'
+        },
+        body: {
+            describe: 'Body of note',
+            demand: false,
+            default: "",
+            alias: 'b'
+        }
+    })
+    .command('read','Read a note by title',{
+        title: {
+            describe: 'Title of note',
+            demand: true,
+            alias: 't'
+        }
+    })
+    .command('remove','Remove a note by title',{
+        title: {
+            describe: 'Title of note',
+            demand: true,
+            alias: 't'
+        }
+    })
+    .command('list','List all the existent notes',{ })
+    .help()
+    .argv;
 
 //console.log("module.filename",module.filename);
 //console.log("globals.Buffer",global.Buffer);
