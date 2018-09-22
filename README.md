@@ -18,3 +18,5 @@
 #### Using Chrome Debug tools
 ```nodemon --inspect-brk app.js```
 Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node"
+
+### arraow functions and methods on objects
