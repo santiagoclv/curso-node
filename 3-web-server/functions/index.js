@@ -9,6 +9,9 @@ admin.initializeApp(functions.config().firebase);
 
 const cloudStore = admin.firestore();
 
+const settings = {timestampsInSnapshots: true};
+cloudStore.settings(settings);
+
 const server = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
