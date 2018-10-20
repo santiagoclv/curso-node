@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>True Facts</title>
+</head>
+<body>
+    {{> header}}
+    <h1>True Facts</h1>
+    <ul>
+        {{#each facts}}
+            <li>
+                <span class="title">{{title}}</span> : <span class="text">{{body}}</span>
+            </li>
+        {{/each}}
+    </ul>
+    {{> footer}}
+</body>
+</html>
