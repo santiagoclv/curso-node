@@ -29,4 +29,6 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * middleware express: they are set using express method use() and are excecuted in sequenzial order unless one of then do not call next() callback.
     * view engien and more methods from express applications.
     * helpers hbs , partials and templates
+    * Deploy on firebase using Hosting (static folder), Functions (dynamic folder) and Database (Cloud Firestore)
+    * Caching responses.
     
