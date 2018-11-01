@@ -32,3 +32,4 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * Deploy on firebase using Hosting (static folder), Functions (dynamic folder) and Database (Cloud Firestore)
     * Caching responses.
     
+## Automated Test with mocha

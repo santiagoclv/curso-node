@@ -1,0 +1,14 @@
+{
+  "name": "4-running-test",
+  "version": "1.0.0",
+  "description": "Running automated test with mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
