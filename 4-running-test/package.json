@@ -4,12 +4,17 @@
   "description": "Running automated test with mocha",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.test.js",
-    "test-watch": "nodemon --exec \"npm test\""
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec \"npm run test\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "expect": "^1.20.2",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }

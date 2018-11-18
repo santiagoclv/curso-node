@@ -53,7 +53,7 @@ server.use('/howareyou', (req, res, next) => {
     res.send("Fine!");
 });
 
-//server.use(express.static(__dirname + '/public'));
+//server.use(express.static(__dirname + '../public'));
 
 // https://expressjs.com/en/api.html#app.get.method
 server.get('/', (request, response) => {
