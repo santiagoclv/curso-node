@@ -3,7 +3,15 @@ const express = require('express');
 const server = express();
 
 server.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.status(200).send('Hello World!');
+});
+
+server.get('/hi', (req, res) => {
+    res
+        .status(404)
+        .send({
+            error: 'Page not found.'
+        });
 });
 
 server.listen(3000, () => {

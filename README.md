@@ -37,3 +37,5 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * Using expect to do assertions.
     * Async assertions.
     * Using supertest to do request to express server.
+    * _Test Spies_
+    ** Spy Rewire

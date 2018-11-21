@@ -3,36 +3,32 @@ const expect = require('expect');
 const { add, square, setName, asyncAdd } = require('../utils/operators');
 
 
-describe('operators', () => {
-    describe('add', () => {
-        it('should add two numbers', () => {
+describe('operators.js', () => {
+    
+    it('should add two numbers', () => {
             const val = add(1, 2);
 
             expect(val).toBe(3).toBeA('number');
-        });
     });
 
-    describe('square', () => {
-        it('should square return a number', () => {
+
+    it('should square return a number', () => {
             const val = square(3);
 
             expect(val).toBe(9).toBeA('number');
-        });
     });
 
-    describe('add async', () => {
-        it('should add two numbers', (done) => {
+    it('should add two numbers', (done) => {
 
             asyncAdd( 4, 4, (result) => {
                 expect(result).toBe(8).toBeA('number');
                 done();
             })
-        });
     });
 
 });
 
-describe('some random tests', () => {
+describe('operators.js playground expect', () => {
 
     it('Should verify first and last name are set', () => {
         const user = setName({age: 22, lastName: "Roberto", firstName: "Mussso"}, "Alberto Guazo");
