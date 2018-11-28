@@ -39,3 +39,9 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * Using supertest to do request to express server.
     * _Test Spies_
     ** Spy Rewire
+
+## To do list App - NoSQL 
+    * MongoDB connection
+    * Collections and documents
+    * Operations: Find, Insert, Delete, Update
+    * Mongoose ODM
