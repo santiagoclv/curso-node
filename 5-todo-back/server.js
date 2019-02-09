@@ -21,7 +21,15 @@ server.post('/todos', (req, res) => {
         .catch((e) => res.status(400).send(e));
 });
 
+server.get('/todos', (req, res) => {
+    Todo.find()
+        .then( todos => res.send({ todos }))
+        .catch( e => res.status(400).send({ error: e }));
+});
+
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Working Todo Back over ${process.env.EXPRESS_PORT} port`);
 });
+
+module.exports = {server}

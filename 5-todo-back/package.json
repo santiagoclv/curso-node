@@ -4,7 +4,11 @@
   "description": "",
   "main": "todo_back.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha **/*.test.js --timeout 15000",
+    "mongodb": "mongod --dbpath $HOME/data",
+    "test-watch": "nodemon --exec \"npm run test\"",
+    "start": "nodemon server.js"
+
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +20,12 @@
     "express": "^4.16.4",
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.13"
+  },
+  "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.7",
+    "rewire": "^4.0.1",
+    "supertest": "^3.3.0"
   }
 }

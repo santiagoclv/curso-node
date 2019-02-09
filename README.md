@@ -45,3 +45,4 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * Collections and documents
     * Operations: Find, Insert, Delete, Update
     * Mongoose ODM
+    * More of testing with db and mocha

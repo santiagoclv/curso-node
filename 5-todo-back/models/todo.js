@@ -18,4 +18,4 @@ TodoSchema.methods.markAsCompleted = function () {
   
 const Todo = mongoose.model('Todo', TodoSchema);
 
-module.exports = {Todo};
+module.exports = {Todo, mongoose};
