@@ -46,3 +46,6 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * Operations: Find, Insert, Delete, Update
     * Mongoose ODM
     * More of testing with db and mocha
+    * ObjectId mongo validation on tets
+    * GET Method, Getting an individual resource
+

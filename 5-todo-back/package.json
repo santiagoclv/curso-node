@@ -4,11 +4,10 @@
   "description": "",
   "main": "todo_back.js",
   "scripts": {
-    "test": "mocha **/*.test.js --timeout 15000",
+    "mocha-test": "mocha **/*.test.js --timeout 15000",
     "mongodb": "mongod --dbpath $HOME/data",
     "test-watch": "nodemon --exec \"npm run test\"",
     "start": "nodemon server.js"
-
   },
   "author": "",
   "license": "ISC",

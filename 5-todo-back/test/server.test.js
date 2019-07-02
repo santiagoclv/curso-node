@@ -1,6 +1,8 @@
 const request = require('supertest');
 const expect = require('expect');
 
+const { ObjectID } = require('mongodb');
+
 const { server } = require('./../server');
 const { Todo, mongoose } = require('./../models/todo');
 
@@ -19,6 +21,10 @@ describe('MongoDB connexion', () => {
 
 describe('POST /todos', () => {
 
+    beforeEach(() => {
+        console.log("\tbeforeEach every Test");
+    });
+
     it('should create a new Todo item', (done) => {
         const text = "Todo Text";
         const title = "Todo Title";
@@ -29,6 +35,7 @@ describe('POST /todos', () => {
             .expect(200)
             .expect( res => {
                 _id = res.body._id;
+                expect(ObjectID.isValid(_id)).toBe(true);
                 expect(res.body).toInclude({text, title})
             })
             .end( (err, res) => {
@@ -44,11 +51,7 @@ describe('POST /todos', () => {
     });
 
     it('should not create a Todo item with invalid body data', (done) => {
-        let items = null;
-        Todo.find().then( (todos) => {
-            items = todos.length;
-
-            request(server)
+        request(server)
             .post('/todos')
             .send({})
             .expect(400)
@@ -56,13 +59,8 @@ describe('POST /todos', () => {
                 if(err){
                     done(err)
                 }
-                
-                Todo.find().then( (todos) => {
-                    expect(todos.length).toBe(items);
-                    done();
-                }).catch((e) => done(e));
+                done();
             });
-        }).catch((e) => done(e));
     });
 });
 
@@ -81,3 +79,17 @@ describe('GET /todos', () => {
     });
 });
 
+
+describe('GET /todos/:id', () => {
+
+    // it('should return a list of the existent Todo items', (done) => {
+    //     request(server)
+    //         .get('/todos')
+    //         .expect(200)
+    //         .expect( res => {
+    //             expect(res.body.todos).toBeA('object');
+    //             expect(res.body.todos.length).toBeA('number');
+    //         })
+    //         .end(done);
+    // });
+});
