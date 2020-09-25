@@ -1,6 +1,5 @@
-console.log('Starting notes.js');
-
 const fs = require('fs');
+const chalk = require('chalk');
 
 const fetchNotes = () => {
     try {
@@ -17,21 +16,14 @@ const fetchNotes = () => {
     }
 };
 
-const saveNotes = (notes) => {
-    fs.writeFileSync('note-data.json', JSON.stringify(notes));
-};
+const saveNotes = (notes) => fs.writeFileSync('note-data.json', JSON.stringify(notes));
 
-const findNote = (notes, title) => {
-    const note = notes.find((note) => {
-        return note.title === title;
-    });
-    return note;
-};
+const findNote = (notes, title) => notes.find( (note) => note.title === title);
 
 const logNote = (note, id ) => {
     console.log(`----     ${id}     ----`);
-    console.log("Title: ", note.title);
-    console.log("Body: ", note.body);
+    console.log(chalk.blue("Title: "), note.title);
+    console.log(chalk.blue("Body: "), note.body);
 };
 
 const addNote = (title, body) => {
@@ -40,15 +32,14 @@ const addNote = (title, body) => {
     if(!findNote(notes, title)){
         notes.push(note);
         saveNotes(notes);
-        console.log(`----   "${title}" Note was saved    ----`);
+        console.log(chalk.green(`----   "${title}" Note was saved    ----`));
     } else {
-        console.log(`----   "${title}" Note already exists    ----`);
+        console.log(chalk.yellow(`----   "${title}" Note already exists    ----`));
     }
 };
 
 const getAll = () => {
-    const notes = fetchNotes();
-    notes.forEach((note, i) => {
+    fetchNotes().forEach((note, i) => {
         logNote(note, i);
     });
 };
@@ -58,7 +49,7 @@ const getNote = (title) => {
     if(note){
         logNote(note, "Note");
     } else {
-        console.log(`----   "${title}" Note does not exit    ----`);
+        console.log(chalk.yellow(`----   "${title}" Note does not exit    ----`));
     }
 };
 
@@ -68,9 +59,9 @@ const removeNote = (title) => {
     if(note){
         notes = notes.filter( (n) => n.title !== title );
         saveNotes(notes);
-        console.log(`----   "${title}" Note was removed    ----`);
+        console.log(chalk.red(`----   "${title}" Note was removed    ----`));
     } else {
-        console.log(`----   "${title}" Note does not exit    ----`);
+        console.log(chalk.yellow(`----   "${title}" Note does not exit    ----`));
     }
 };
 
