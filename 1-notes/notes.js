@@ -12,6 +12,7 @@ const fetchNotes = () => {
         }
         return notes;
     } catch(e){
+        console.error(e)
         return [];
     }
 };
@@ -63,7 +64,7 @@ const getNote = (title) => {
 
 const removeNote = (title) => {
     let notes = fetchNotes();
-    const note = findNote(fetchNotes(), title);
+    const note = findNote(notes, title);
     if(note){
         notes = notes.filter( (n) => n.title !== title );
         saveNotes(notes);
