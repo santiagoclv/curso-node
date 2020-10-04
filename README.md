@@ -1,6 +1,9 @@
 # CursoNode
 
-## First - Simple r and w over the fs using node and a overview over debugging an app
+## First - Notes app
+
+* Simple r and w over the fs using node and a overview over debugging an app
+* Creation of command line app with arguments
 
 ### To start debug mode.
 ```node inspect app.js```
