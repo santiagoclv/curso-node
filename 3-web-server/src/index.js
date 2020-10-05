@@ -1,36 +1,31 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+require("dotenv/config");
+const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
-//const fs = require('fs');
-
-
-admin.initializeApp(functions.config().firebase);
-
-const cloudStore = admin.firestore();
-
-const settings = {timestampsInSnapshots: true};
-cloudStore.settings(settings);
+const fs = require('fs');
 
 const server = express();
 
-hbs.registerPartials(__dirname + '/views/partials');
-// https://expressjs.com/en/api.html#app.set
-server.set('view engine', 'hbs');
 
+// https://expressjs.com/en/api.html#app.set
+
+hbs.registerPartials(path.join(__dirname, 'views/partials'));
+
+// This could be located on helpers js files
 hbs.registerHelper('getYear', () => (new Date()).getFullYear());
 hbs.registerHelper('toUppercase', (text) => text.toUpperCase());
 
+server.set('view engine', 'hbs');
+server.set('views', path.join(__dirname, 'views'));
 //https://expressjs.com/en/api.html#app.use
 // Middelware funtions are executed in sequenzial order
 // like a logger
 server.use((req, res, next) => {
     const now = new Date().toString();
     const log = `${now}: ${req.method} ${req.url}`;
-    console.log(log);
-    // fs.appendFile('server.log', log + '\n', (err) => {
-    //     if (err) console.error(err)
-    // });
+    fs.appendFile('server.log', log + '\n', (err) => {
+        if (err) console.error(err)
+    });
     next();
 });
 
@@ -43,7 +38,7 @@ server.use((req, res, next) => {
     next();
 });
 
-// on maintenance example without next
+// On maintenance servere -> example without next
 // server.use((req, res, next) => {
 //     res.send("Fine!");
 // });
@@ -53,7 +48,7 @@ server.use('/howareyou', (req, res, next) => {
     res.send("Fine!");
 });
 
-//server.use(express.static(__dirname + '../public'));
+server.use(express.static(path.join(__dirname, '../public')));
 
 // https://expressjs.com/en/api.html#app.get.method
 server.get('/', (request, response) => {
@@ -93,40 +88,37 @@ server.get('/about', (request, response) => {
 
 // https://expressjs.com/en/api.html#res.render
 server.get('/facts', (request, response) => {
-    cloudStore.collection('facts').get()
-        .then((snapshot) => {
-            let facts = [];
-            snapshot.forEach((doc) => {
-                facts.push(doc.data());
-            });
-            const payload = {
-                header : "True Facts",
-                facts,
-                paragraph : "Facts, Facts, Facts, Facts, Facts."
-            };
-
-            // if a callback is specified, the rendered HTML string has to be sent explicitly
-            response.render('facts.hbs', payload, (err, html) => {
-                if (err) {
-                    console.error(err);
-                }
-                response.send(html);
-            });
-        })
-        .catch((err) => {
-            console.error('Error getting documents', err);
-            response.sendStatus(404);
-        });
-  
+    const payload = {
+        header : "True Facts",
+        facts: [
+            {
+                title: "Hola",
+                body: "Bola"
+            },
+            {
+                title: "Sola",
+                body: "Gola"
+            },
+            {
+                title: "Nola",
+                body: "Chola"
+            },
+            {
+                title: "Mola",
+                body: "Tola"
+            }
+        ],
+        paragraph : "Facts, Facts, Facts, Facts, Facts."
+    };
+    response.render('facts.hbs', payload, (err, html) => {
+        if (err) {
+            console.error(err);
+        }
+        response.send(html);
+    });
 });
 
-// second param optional, callback that is call when the server is up and running.
-//https://expressjs.com/en/api.html#app.listen
-// server.listen(3000, () => {
-//     console.log("Web Server Running on port 3000");
-// });
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-exports.server = functions.https.onRequest(server);
+const port = parseInt(process.env.PORT, 10) || 3000;
+server.listen(port, () =>{
+    console.log("Server is up and running on port: ", port)
+} )
