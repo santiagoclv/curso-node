@@ -3,7 +3,7 @@ const axios = require("axios");
 // native http lib from node
 const https = require("https");
 
-const api_key = process.env.NASA_API_KEY
+const api_key = "DEMO_KEY" // process.env.NASA_API_KEY
 
 https.get(`https://api.nasa.gov/planetary/apod?api_key=${api_key}`, (res) => {
     let data = '';

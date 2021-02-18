@@ -32,23 +32,4 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * middleware express: they are set using express method use() and are excecuted in sequenzial order unless one of then do not call next() callback.
     * view engien and more methods from express applications.
     * helpers hbs , partials and templates
-    * Deploy on firebase using Hosting (static folder), Functions (dynamic folder) and Database (Cloud Firestore)
     * Caching responses.
-    
-## Automated Test
-    * Using mocha to run the tests.
-    * Using expect to do assertions.
-    * Async assertions.
-    * Using supertest to do request to express server.
-    * _Test Spies_
-    ** Spy Rewire
-
-## To do list App - NoSQL 
-    * MongoDB connection
-    * Collections and documents
-    * Operations: Find, Insert, Delete, Update
-    * Mongoose ODM
-    * More of testing with db and mocha
-    * ObjectId mongo validation on tets
-    * GET Method, Getting an individual resource
-

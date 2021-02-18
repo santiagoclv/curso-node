@@ -6,17 +6,19 @@ const fs = require('fs');
 
 const server = express();
 
+const public_folder = path.join(__dirname, '../public');
+const partials_folder = path.join(__dirname, '../views/partials');
 
-// https://expressjs.com/en/api.html#app.set
-
-hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
 // This could be located on helpers js files
 hbs.registerHelper('getYear', () => (new Date()).getFullYear());
 hbs.registerHelper('toUppercase', (text) => text.toUpperCase());
 
+
 server.set('view engine', 'hbs');
-server.set('views', path.join(__dirname, 'views'));
+hbs.registerPartials(partials_folder);
+
+server.use(express.static(public_folder));
 //https://expressjs.com/en/api.html#app.use
 // Middelware funtions are executed in sequenzial order
 // like a logger
@@ -44,23 +46,22 @@ server.use((req, res, next) => {
 // });
 
 // specific route to middleware
-server.use('/howareyou', (req, res, next) => {
-    res.send("Fine!");
-});
-
-server.use(express.static(path.join(__dirname, '../public')));
+// server.use('/howareyou', (req, res, next) => {
+//     res.send("Fine!");
+// });
 
 // https://expressjs.com/en/api.html#app.get.method
-server.get('/', (request, response) => {
+server.get('', (request, response) => {
     /**
      *  request; contains all the data that comes with the request and information about it
      *  response; contains all the methods and information needed to response to the request.
      */
-    const payload = {title : "Titulo home",
+    const payload = {
+        title : "Titulo home",
         wellcome : "Wellcome! a mi home puto."
     };
 
-    response.render('home.hbs', payload, (err, html) => {
+    response.render('index', payload, (err, html) => {
         if (err) {
             console.error(err);
         }
@@ -76,7 +77,7 @@ server.get('/about', (request, response) => {
         paragraph : "About, About, About, About, About."
     };
     // if a callback is specified, the rendered HTML string has to be sent explicitly
-    response.render('about.hbs', payload, (err, html) => {
+    response.render('about', payload, (err, html) => {
         if (err) {
             console.error(err);
         }
@@ -110,12 +111,21 @@ server.get('/facts', (request, response) => {
         ],
         paragraph : "Facts, Facts, Facts, Facts, Facts."
     };
-    response.render('facts.hbs', payload, (err, html) => {
+    response.render('facts', payload, (err, html) => {
         if (err) {
             console.error(err);
         }
         response.send(html);
     });
+});
+
+server.get('*', (request, response) => {
+    response.render('404', {}, (err, html) => {
+        if (err) {
+            console.error(err);
+        }
+        response.send(html);
+    })
 });
 
 const port = parseInt(process.env.PORT, 10) || 3000;
