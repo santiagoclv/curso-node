@@ -33,4 +33,4 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * view engien and more methods from express applications.
     * helpers hbs , partials and templates
     * Caching responses.
-    * Consume api from node app. (NASA)
+    * Consume api from node app using axios and https. (NASA)

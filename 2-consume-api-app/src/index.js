@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+const { getApodData } = require("./nasa-api");
 
 const server = express();
 
@@ -112,6 +113,21 @@ server.get('/facts', (request, response) => {
         paragraph : "Facts, Facts, Facts, Facts, Facts."
     };
     response.render('facts', payload, (err, html) => {
+        if (err) {
+            console.error(err);
+        }
+        response.send(html);
+    });
+});
+
+// https://expressjs.com/en/api.html#res.render
+server.get('/apod', async (request, response) => {
+    const payload = await getApodData(request?.query);
+    if(!payload){
+        response.redirect("/apod")
+    }
+    payload.isImage = payload?.media_type === "image"
+    response.render('apod', payload, (err, html) => {
         if (err) {
             console.error(err);
         }
