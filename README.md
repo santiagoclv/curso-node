@@ -22,14 +22,15 @@
 ```nodemon --inspect-brk app.js```
 Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node"
 
-### arraow functions and methods on objects
+### arraow functions and methods on objects (playground)
 
-## Second - Async Basics
+## Second - Consume api and serve content
 
-## Web Server And Deployment
+### Web Server
     * http://expressjs.com/
     * web server from public folder. serving content of it.
     * middleware express: they are set using express method use() and are excecuted in sequenzial order unless one of then do not call next() callback.
     * view engien and more methods from express applications.
     * helpers hbs , partials and templates
     * Caching responses.
+    * Consume api from node app. (NASA)
