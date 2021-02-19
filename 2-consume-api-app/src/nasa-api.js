@@ -17,7 +17,10 @@ async function getApodData(instance, params = {}) {
 const instance = axios.create({
     baseURL: 'https://api.nasa.gov/planetary/',
     timeout: 5000,
-    headers: { 'X-Custom-Header': 'foobar' },
+    headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+    },
     params: { api_key }
 });
 
