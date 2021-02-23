@@ -50,3 +50,5 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
         - hash vs encrypt: In the first one, the value of the hash cannot be obtained and the encryption is reversible
     * JWT Authtentication with __jsonwebtoken__
         - the meaning of this is to give the client a way to auth to the api, the way would be a token created with the method `sign` that has a expiretion date that also contains information about the user that could be easily check by the back with the `verify` method.
+    * middleware to single routes.
+    
