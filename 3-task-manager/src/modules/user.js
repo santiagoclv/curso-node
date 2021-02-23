@@ -51,6 +51,15 @@ const userSchema = new Schema({
     tokens: [tokenSchema]
 });
 
+// when a doc is send through express it runs this method.
+userSchema.methods.toJSON = function generateAuthToken(){
+    const user = this;
+    const userData = user.toObject();
+    delete userData.password;
+    delete userData.tokens;
+    return userData;
+}
+
 userSchema.methods.generateAuthToken = async function generateAuthToken(){
     const user = this;
     const token = jwt.sign({ _id: user._id }, process.env.KEY);
@@ -76,8 +85,10 @@ userSchema.statics.findByCredentials = async function (email, password) {
 }
 
 async function hashPassword(next) {
-    if(this.isModified('password')){
-        this.password = await bcrypt.hash(this.password, 8);
+    const user = this;
+    if(user.isModified('password')){
+        user.password = await bcrypt.hash(user.password, 8);
+        user.tokens = [];
     }
     next();
 }

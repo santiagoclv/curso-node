@@ -7,30 +7,17 @@ router.get("/users/me", auth, (req, res) => {
     res.send(req.user);
 });
 
-router.get("/users/:id", async (req, res) => {
+router.delete("/users/me", auth, async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
-        res.status(user ? 200 : 404 ).send(user)
+        await req.user.remove();
+        res.status(200).send(req.user);
     } catch (error) {
-        console.error(error)
         res.status(500).send(error.message);
     }
 });
 
-router.delete("/users/:id", async (req, res) => {
-    try {
-        const user = await User.findByIdAndDelete(req.params.id);
-        res.status(user ? 200 : 404 ).send(user)
-    } catch (error) {
-        console.error(error)
-        res.status(500).send(error.message);
-    }
-});
-
-router.patch("/users/:id", async (req, res) => {
-    const id = req.params.id;
-    const data = req.body;
-    const updates = Object.keys(data);
+router.patch("/users/me", auth, async (req, res) => {
+    const updates = Object.keys(req.body);
     const allowedUpdates = ["name", 'email', 'password', 'age'];
     const isValidUpdate = updates.every( up => allowedUpdates.includes(up) )
 
@@ -39,12 +26,10 @@ router.patch("/users/:id", async (req, res) => {
     }
 
     try {
-        const user = await User.findById(id);
-        updates.forEach( field => user[field] = data[field]);
-        await user.save();
-        res.status(user ? 200 : 404 ).send(user);
+        updates.forEach( field => req.user[field] = req.body[field]);
+        await req.user.save();
+        res.send(req.user);
     } catch (error) {
-        console.error(error)
         res.status(400).send(error.message);
     }
 });
