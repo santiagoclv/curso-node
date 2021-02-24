@@ -44,6 +44,10 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * mongoose
         - schemas
         - middleware
+        - methods + statics for models
+        - submodels
+        - refs and virtual (schemas)
+        - query ( populate('field').execPopulate() )
 
 ### Security + API Authtentication
     * save passwords with __bcryptjs__
@@ -51,4 +55,5 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * JWT Authtentication with __jsonwebtoken__
         - the meaning of this is to give the client a way to auth to the api, the way would be a token created with the method `sign` that has a expiretion date that also contains information about the user that could be easily check by the back with the `verify` method.
     * middleware to single routes.
+
     

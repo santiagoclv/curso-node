@@ -3,6 +3,8 @@ const { isEmail } = require("validator");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const Task = require('./task');
+
 const tokenSchema = new Schema({ 
     token: {
         type: String,
@@ -51,6 +53,12 @@ const userSchema = new Schema({
     tokens: [tokenSchema]
 });
 
+userSchema.virtual('tasks', {
+    ref: 'Task',
+    localField: '_id',
+    foreignField: 'owner'
+});
+
 // when a doc is send through express it runs this method.
 userSchema.methods.toJSON = function generateAuthToken(){
     const user = this;
@@ -93,7 +101,14 @@ async function hashPassword(next) {
     next();
 }
 
+async function deleteTasks(next) {
+    const user = this;
+    await Task.deleteMany({ owner: user._id })
+    next();
+}
+
 userSchema.pre('save', hashPassword);
+userSchema.pre('remove', deleteTasks);
 
 const User = model('User', userSchema);
 
