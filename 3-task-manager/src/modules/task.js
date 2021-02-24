@@ -15,6 +15,9 @@ const TaskSchema = new Schema({
         required: true,
         ref: 'User'
     },
+},
+{
+    timestamps: true
 });
 
 const Task = model('Task', TaskSchema);

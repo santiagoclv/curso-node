@@ -51,7 +51,11 @@ const userSchema = new Schema({
         }
     },
     tokens: [tokenSchema]
-});
+},
+{
+    timestamps: true
+}
+);
 
 userSchema.virtual('tasks', {
     ref: 'Task',
