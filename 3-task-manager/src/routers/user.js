@@ -1,8 +1,8 @@
 const express = require('express');
-const multer = require('multer');
-const sharp = require('sharp');
 const User = require("../modules/user");
 const auth = require("../middlewares/auth");
+const { imageAvatar, convertAvatar } = require("../middlewares/multer");
+
 const router = new express.Router();
 
 router.get("/users/me", auth, (req, res) => {
@@ -36,34 +36,9 @@ router.patch("/users/me", auth, async (req, res) => {
     }
 });
 
-const avatars = multer({
-    // If we do not specify the destinatiion, multer will pass as a binary to the router.
-    // dest: 'avatars',
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb){
-        // REGX
-        // !file.mimetype.startsWith('image') \.doc$
-        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
-            return cb(new Error('Please upload an image.'))
-        }
-
-        cb(undefined, true);
-    }
-});
-
-router.post("/users/me/avatar", [auth, avatars.single('avatar')], async (req, res) => {
+router.post("/users/me/avatar", [auth, imageAvatar.single('avatar')], async (req, res) => {
     try {
-        const image = await sharp(req.file.buffer)
-                    .resize({
-                        width: 200,
-                        height: 200,
-                        fit: sharp.fit.cover,
-                        position: sharp.strategy.entropy
-                    })
-                    .png()
-                    .toBuffer();
+        const image = await convertAvatar(req.file.buffer);
         req.user.avatar = {
             image,
             mimetype: 'image/png'

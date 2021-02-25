@@ -5,7 +5,7 @@ const User = require('../modules/user');
 const auth = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '');
-        const cosas = jwt.verify(token, process.env.KEY);
+        const cosas = jwt.verify(token, process.env.JWT_KEY);
         const user = await User.findOne({ _id: cosas._id, 'tokens.token': token });
 
         if(!user){

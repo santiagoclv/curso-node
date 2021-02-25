@@ -62,4 +62,6 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     * conver to png.
     * resize file.
 
-    
+### Send emails through https://sendgrid.com/
+    * sign up email.
+    * delete account email.
