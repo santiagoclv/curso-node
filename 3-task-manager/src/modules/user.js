@@ -11,6 +11,16 @@ const tokenSchema = new Schema({
         required: true,
     }
 });
+
+const avatarSchema = new Schema({ 
+    image: {
+        type: Buffer
+    },
+    mimetype: {
+        type: String
+    },
+});
+
 const userSchema = new Schema({
     name: {
         type: String,
@@ -50,6 +60,7 @@ const userSchema = new Schema({
             }
         }
     },
+    avatar: avatarSchema,
     tokens: [tokenSchema]
 },
 {
@@ -69,6 +80,7 @@ userSchema.methods.toJSON = function generateAuthToken(){
     const userData = user.toObject();
     delete userData.password;
     delete userData.tokens;
+    delete userData.avatar;
     return userData;
 }
 

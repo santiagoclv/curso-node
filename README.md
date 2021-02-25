@@ -56,4 +56,10 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
         - the meaning of this is to give the client a way to auth to the api, the way would be a token created with the method `sign` that has a expiretion date that also contains information about the user that could be easily check by the back with the `verify` method.
     * middleware to single routes.
 
+### File Uploading with __multer__ and __sharp__ to resize and convert
+    * type filters.
+    * size limits.
+    * conver to png.
+    * resize file.
+
     
