@@ -65,3 +65,14 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
 ### Send emails through https://sendgrid.com/
     * sign up email.
     * delete account email.
+
+### Production MongoDB through Atlas https://www.mongodb.com/
+
+### Automated Testing (Why tests?)
+    * Saves time
+    * Creates reliable code
+    * Gives flexibility to devs:
+        - refactoring
+        - collaborating
+        - profiling
+    * Peace of mind
