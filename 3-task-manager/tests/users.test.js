@@ -1,27 +1,10 @@
 const request = require('supertest');
-const { Types: { ObjectId } } = require('mongoose');
 const app = require("../src/app");
 const User = require("../src/modules/user");
 
-const user_one = {
-    name: "Martin",
-    age: 4,
-    email: "martin@gm.com",
-    password: "martin123"
-};
+const { user_one, user_two, setupDatabase } = require("./fixtures/db");
 
-const user_two = {
-    _id: new ObjectId(),
-    name: "Santiago",
-    age: 3,
-    email: "santi@gm.com",
-    password: "santi123",
-};
-
-beforeEach( async () => {
-    await User.deleteMany();
-    await new User(user_two).save();
-});
+beforeEach(setupDatabase);
 
 test("Should sign up new user", async () => {
     const response = await request(app).post('/users').send(user_one);
@@ -111,4 +94,28 @@ test("Should update user's avatar", async () => {
     const user = await User.findById(user_two._id);
 
     expect(user.avatar.image).toEqual(expect.any(Buffer));
+});
+
+test("Should not update user's avatar", async () => {
+    const { body: { token }} = await request(app).post('/users/login').send(user_two);
+
+    const response = await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${token}` )
+        .attach('avatar', 'tests/fixtures/cthulhu.jpg');
+
+    expect(response.status).toBe(400);
+});
+
+test("Should update user's name", async () => {
+    const { body: { token }} = await request(app).post('/users/login').send(user_two);
+    const name = "Roberto";
+    await request(app)
+        .patch('/users/me')
+        .set('Authorization', `Bearer ${token}` )
+        .send({ name });
+
+    const user = await User.findById(user_two._id);
+    expect(user.name).not.toBe(user_two.name);
+    expect(user.name).toBe(name);
 });

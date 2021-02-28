@@ -59,6 +59,7 @@ router.post("/tasks", auth, async (req, res) => {
 
 router.delete("/tasks/:id", auth, async (req, res) => {
     try {
+        const _id = req.params.id;
         const task = await Task.findOneAndDelete({ _id, owner: req.user._id });
         res.status(task ? 200 : 404 ).send(task)
     } catch (error) {
