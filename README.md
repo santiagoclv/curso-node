@@ -76,3 +76,6 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
         - collaborating
         - profiling
     * Peace of mind
+
+    - Async test
+    - mock libraries

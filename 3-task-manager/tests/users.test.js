@@ -1,6 +1,5 @@
 const request = require('supertest');
 const { Types: { ObjectId } } = require('mongoose');
-const jwt = require('jsonwebtoken');
 const app = require("../src/app");
 const User = require("../src/modules/user");
 
@@ -24,7 +23,7 @@ beforeEach( async () => {
     await new User(user_two).save();
 });
 
-test("Should sing up new user", async () => {
+test("Should sign up new user", async () => {
     const response = await request(app).post('/users').send(user_one);
     expect(response.status).toBe(201);
     expect(response.body).toMatchObject({
@@ -52,6 +51,7 @@ test("Should not login nonexisting user", async () => {
 
 test("Should get auth user", async () => {
     const { body: { token }} = await request(app).post('/users/login').send(user_two);
+
     const response = await request(app)
         .get('/users/me')
         .set('Authorization', `Bearer ${token}` )
@@ -100,3 +100,15 @@ test("Should not delete account for user without auth", async () => {
     expect(deleteResponse.status).toBe(401);
 });
 
+test("Should update user's avatar", async () => {
+    const { body: { token }} = await request(app).post('/users/login').send(user_two);
+
+    await request(app)
+        .post('/users/me/avatar')
+        .set('Authorization', `Bearer ${token}` )
+        .attach('avatar', 'tests/fixtures/pan.jpg');
+
+    const user = await User.findById(user_two._id);
+
+    expect(user.avatar.image).toEqual(expect.any(Buffer));
+});
