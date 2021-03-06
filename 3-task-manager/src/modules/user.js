@@ -75,7 +75,7 @@ userSchema.virtual('tasks', {
 });
 
 // when a doc is send through express it runs this method.
-userSchema.methods.toJSON = function generateAuthToken(){
+userSchema.methods.toJSON = function () {
     const user = this;
     const userData = user.toObject();
     delete userData.password;

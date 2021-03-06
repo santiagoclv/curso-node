@@ -24,6 +24,8 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
 
 ### arraow functions and methods on objects (playground)
 
+![eventloop](./playground/NodeStack.png)
+
 ## Second - Consume api and serve content
 
 ### Web Server
@@ -56,6 +58,8 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
         - the meaning of this is to give the client a way to auth to the api, the way would be a token created with the method `sign` that has a expiretion date that also contains information about the user that could be easily check by the back with the `verify` method.
     * middleware to single routes.
 
+    * Investigate [pasport](http://www.passportjs.org/) - seems to be a good option for auth.
+
 ### File Uploading with __multer__ and __sharp__ to resize and convert
     * type filters.
     * size limits.
@@ -79,3 +83,20 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
 
     - Async test
     - mock libraries
+
+## Fourth - Chat + Socket.io
+
+### Websocket protocol
+![wsp](./playground/websockets.PNG)
+
+
+### Error handling middleware
+    
+    * https://codeburst.io/better-error-handling-in-express-js-b118fc29e9c7
+
+# Nice to have: 
+    
+    * Event Emitters
+    * Buffers
+    * Streams
+    * Typescript
