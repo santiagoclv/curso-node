@@ -1,7 +1,8 @@
 const express = require('express');
 const User = require("../modules/user");
 const auth = require("../middlewares/auth");
-const { imageAvatar, convertAvatar } = require("../middlewares/multer");
+const imageAvatar = require("../middlewares/multer");
+const convertAvatar = require("../utils/convertAvatar");
 
 const router = new express.Router();
 
