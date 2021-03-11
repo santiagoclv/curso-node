@@ -2,13 +2,18 @@ const socket = io();
 
 const messages = document.getElementById('messages');
 const sendLocation = document.getElementById('send-location');
+const button = document.getElementById('button');
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (input.value) {
-        socket.emit('message-chat', input.value);
+        button.disabled = true;
+        socket.emit('message-chat', input.value, (payload) => {
+          setTimeout( () => button.disabled = false, 1500)
+          console.log(payload)
+        });
         input.value = '';
     }
 });

@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const Filter = require('bad-words');
 
 const port = process.env.PORT;
 
@@ -30,10 +31,18 @@ io.on('connection', (socket) => {
         io.emit('message-server', `<a href="https://google.com/maps?q=${latitude},${longitude}">Location</a> AT ${new Date(timestamp)}`);
     });
 
-    socket.on('message-chat', (msg) => {
+    socket.on('message-chat', (msg, callback) => {
 
+        const filter = new Filter();
+        
+        if(filter.isProfane(msg)){
+            return callback(`${msg} contains a bad word`)
+        } else {
+            callback();
+        }
         // if I emit the event over io, it is broadcasted but if I use socket it will be only sent to the same conection.
         io.emit('message-server', msg);
+        
     });
 });
 

@@ -84,17 +84,19 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
     - Async test
     - mock libraries
 
+### Error handling middleware
+    
+    * https://codeburst.io/better-error-handling-in-express-js-b118fc29e9c7
+
 ## Fourth - Chat + Socket.io
 
 ### Websocket protocol
 ![wsp](./playground/websockets.PNG)
 
+### Bad words filters
 
-### Error handling middleware
-    
-    * https://codeburst.io/better-error-handling-in-express-js-b118fc29e9c7
 
-# Nice to have: 
+# Nice to have playgrounds: 
     
     * Event Emitters
     * Buffers
