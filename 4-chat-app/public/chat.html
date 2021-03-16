@@ -79,18 +79,39 @@
         #messages>li:nth-child(odd) {
             background: #efefef;
         }
+
+        body{
+            display: flex;
+        }
+
+        #users-list-container{
+            width: 200px;
+            height: 100vh;
+            border-right: solid 5px #333;
+        }
+
+        #users-list>li {
+            padding: 0.5rem 1rem;
+            color: #333;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Join and Chat!</h1>
-    <form action="/chat.html">
-        <label for="nickname">Nickname:</label><br>
-        <input type="text" id="nickname" name="nickname" /><br>
-        <label for="room">Room:</label><br>
-        <input type="text" id="room" name="room" /><br><br>
-        <button id="button" >Join</button>
-    </form>
+    <div id="users-list-container">
+        <ul id="users-list">
+
+        </ul>
+    </div>
+    <div>
+        <div id="header">Chat App <button id="send-location">Send Location</button></div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" autocomplete="off" /><button id="button">Send</button>
+        </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>
