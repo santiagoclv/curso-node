@@ -96,9 +96,4 @@ Then go to ```chrome://inspect``` and open the "Open dedicated DevTools for Node
 ### Bad words filters
 
 
-# Nice to have playgrounds: 
-    
-    * Event Emitters
-    * Buffers
-    * Streams
-    * Typescript
+## Fifth - GraphQL and Dataloader

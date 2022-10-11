@@ -1,0 +1,27 @@
+{
+  "name": "spacex-graphql-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev:18": "node --watch index.js",
+    "start:dev:16": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  },
+  "dependencies": {
+    "apollo-datasource": "^3.3.2",
+    "apollo-datasource-rest": "^3.7.0",
+    "apollo-log": "^1.1.0",
+    "apollo-server": "^3.10.3",
+    "dataloader": "^2.1.0",
+    "graphql": "^16.6.0",
+    "lodash": "^4.17.21",
+    "sqlite3": "^4.2.0"
+  }
+}
